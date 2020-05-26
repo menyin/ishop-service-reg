@@ -2,12 +2,14 @@ package com.cnyishop.service.reg.controller;
 
 import com.cnyishop.service.reg.mapper.UserMapper;
 import com.cnyishop.service.reg.model.User;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * 采用restfull风格
  */
+@ApiOperation(value = "用户服务", notes = "以实体类为参数，注意用户名和邮箱不要重复")
 @RestController
 @RequestMapping(value = "user")
 public class RegController {
