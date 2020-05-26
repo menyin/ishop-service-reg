@@ -1,7 +1,7 @@
-package com.cnyishop.service.reg.controller;
+package com.cny.ishop.service.reg.controller;
 
-import com.cnyishop.service.reg.mapper.UserMapper;
-import com.cnyishop.service.reg.model.User;
+import com.cny.ishop.service.reg.mapper.UserMapper;
+import com.cny.ishop.service.reg.model.User;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

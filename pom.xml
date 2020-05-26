@@ -17,6 +17,14 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- Projects Begin -->
+        <dependency>
+            <groupId>com.cny</groupId>
+            <artifactId>ishop-commons-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!-- Projects End -->
+
         <!-- Spring Boot Begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,14 +55,6 @@
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
         <!-- Spring Cloud End -->
-
-        <!-- Projects Begin -->
-        <dependency>
-            <groupId>com.cny</groupId>
-            <artifactId>ishop-commons-service</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Projects End -->
 
 
         <!-- mybatis begin-->

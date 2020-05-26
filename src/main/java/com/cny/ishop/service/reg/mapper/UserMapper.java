@@ -1,6 +1,6 @@
-package com.cnyishop.service.reg.mapper;
+package com.cny.ishop.service.reg.mapper;
 
-import com.cnyishop.service.reg.model.User;
+import com.cny.ishop.service.reg.model.User;
 import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {

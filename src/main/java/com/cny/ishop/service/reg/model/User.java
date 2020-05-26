@@ -1,4 +1,4 @@
-package com.cnyishop.service.reg.model;
+package com.cny.ishop.service.reg.model;
 
 public class User {
     private Integer id;
