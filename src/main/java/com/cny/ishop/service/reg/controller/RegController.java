@@ -1,5 +1,7 @@
 package com.cny.ishop.service.reg.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.cny.ishop.service.reg.mapper.UserMapper;
 import com.cny.ishop.service.reg.model.User;
 import io.swagger.annotations.*;
@@ -66,11 +68,22 @@ public class RegController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "编号", required = true, paramType = "path",example = "1"),
     })
+    @SentinelResource(value = "getUser", blockHandler = "getUserQpsException")//如果不加注解则默认的vlue就是路径"/getSentinel",记得要加"/"
     @GetMapping("{id}")
     public User getUser(@PathVariable Integer id) {
         return userMapper.findById(id);
     }
-
+    /**
+     * 其实和dubbo的mock差不多一个意思
+     * 特别注意：1、该函数的传参必须与资源点的传参一样，并且最后加上BlockException异常参数；同时，返回类型也必须一样。
+     *          2、如果不加该处理函数，则默认会直接给用户抛出“No message available...”异常
+     * @param e
+     * @return
+     */
+    public User getUserQpsException(String id,BlockException e){
+        System.out.println("cny输出错误："+e.getMessage());
+        return new User(0,"未知用户",1000);
+    }
     @ApiResponses({
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对"),
