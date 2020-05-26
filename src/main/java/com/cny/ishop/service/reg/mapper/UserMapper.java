@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
     @Select("SELECT * FROM USERS WHERE ID = #{id}")
-    User findById(@Param("id") String id);
+    User findById(@Param("id") Integer id);
     @Select("SELECT * FROM USERS WHERE NAME = #{name}")
     User findByName(@Param("name") String name);
     @Insert("INSERT INTO USERS(ID,NAME, AGE) VALUES(#{id},#{name}, #{age})")
