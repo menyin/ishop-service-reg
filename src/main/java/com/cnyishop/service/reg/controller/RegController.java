@@ -1,5 +1,7 @@
 package com.cnyishop.service.reg.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.cnyishop.service.reg.mapper.UserMapper;
 import com.cnyishop.service.reg.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,22 @@ public class RegController {
     public String updateUser(User user) {
         return userMapper.update(user) > 0 ? "更新成功" : "更新失败";
     }
+    @SentinelResource(value = "getUser", blockHandler = "getUserQpsException")//如果不加注解则默认的vlue就是路径"/getSentinel",记得要加"/"
     @GetMapping("{id}")
     public User getUser(@PathVariable String id) {
         return userMapper.findById(id);
+    }
+
+    /**
+     * 其实和dubbo的mock差不多一个意思
+     * 特别注意：1、该函数的传参必须与资源点的传参一样，并且最后加上BlockException异常参数；同时，返回类型也必须一样。
+     *          2、如果不加该处理函数，则默认会直接给用户抛出“No message available...”异常
+     * @param e
+     * @return
+     */
+    public User getUserQpsException(String id,BlockException e){
+        System.out.println("cny输出错误："+e.getMessage());
+        return new User(0,"未知用户",1000);
     }
 
     @DeleteMapping("{id}")
