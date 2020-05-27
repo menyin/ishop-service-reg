@@ -48,6 +48,10 @@ public class RegController {
             return userMapper.insert(user) > 0 ? "注册成功" : "注册失败";
         }
     }
+
+
+
+    @ApiOperation(value = "用户更新", notes="根据提交信息更新用户",httpMethod="PUT")
     @ApiResponses({
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对"),
@@ -57,6 +61,9 @@ public class RegController {
     public String updateUser(User user) {
         return userMapper.update(user) > 0 ? "更新成功" : "更新失败";
     }
+
+
+    @ApiOperation(value = "查询用户", notes="根据用户编号查询用户信息",httpMethod="GET")
     @ApiResponses({
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对"),
@@ -84,6 +91,9 @@ public class RegController {
         System.out.println("cny输出错误："+e.getMessage());
         return new User(0,"未知用户",1000);
     }
+
+
+    @ApiOperation(value = "删除用户", notes="根据用户编号删除用户",httpMethod="DELETE")
     @ApiResponses({
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对"),
