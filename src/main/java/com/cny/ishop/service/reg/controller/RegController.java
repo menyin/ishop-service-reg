@@ -80,7 +80,7 @@ public class RegController {
      * @param e
      * @return
      */
-    public User getUserQpsException(String id,BlockException e){
+    public User getUserQpsException(Integer id,BlockException e){
         System.out.println("cny输出错误："+e.getMessage());
         return new User(0,"未知用户",1000);
     }
