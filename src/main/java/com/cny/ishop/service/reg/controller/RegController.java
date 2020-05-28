@@ -75,7 +75,7 @@ public class RegController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "编号", required = true, paramType = "path",example = "1"),
     })
-    @SentinelResource(value = "getUser", blockHandler = "getUserQpsException")//如果不加注解则默认的vlue就是路径"/getSentinel",记得要加"/"
+    @SentinelResource(value = "getUser", blockHandler = "getUserQpsException",fallback ="getUserFallbackException" )//如果不加注解则默认的vlue就是路径"/getSentinel",记得要加"/"
     @GetMapping("{id}")
     public User getUser(@PathVariable Integer id) {
         return userMapper.findById(id);
@@ -89,7 +89,12 @@ public class RegController {
      */
     public User getUserQpsException(Integer id,BlockException e){
         System.out.println("cny输出错误："+e.getMessage());
-        return new User(0,"未知用户",1000);
+        return new User(0,"用户被限流或降级了~",1000);
+    }
+    public User getUserFallbackException(Integer id,BlockException e){
+        System.out.println("cny输出错误："+e.getMessage());
+        System.out.println("cny_note：此错误回调方法一般不配置，一般用SpringMvc的全局异常处理");
+        return new User(0,"服务器代码发生未知异常",1000);
     }
 
 
